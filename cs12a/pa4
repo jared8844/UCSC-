@@ -30,10 +30,11 @@ class Roots{
         double threshold = .001;
         boolean oddRoot = false;
         boolean evenRoot = false;
-        // [a,b]
+        
         double a = L;
         double b = L + resolution;
 
+        //find odd root
         while (a<R){
         if( (poly(C, a))*(poly(C, b)) <0 ){
                System.out.printf("Roots found at " + "%.5f%n", findRoot(C, a, b, tolerance)); // If there is sign change, call findRoot
