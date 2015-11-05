@@ -1,0 +1,85 @@
+// GCD.java
+// Jiahua Zhou
+// jzhou29
+// pa3
+// Finds the GCD of two positive integers
+
+import java.util.Scanner;
+
+class GCD{
+ public static void main(String[] args ){
+  Scanner sc = new Scanner (System.in);
+   int numberOne, numberTwo;
+   numberOne = 0;
+   numberTwo = 0;
+   System.out.print("Enter a positive integer:");
+   while(true){
+    if(sc.hasNextInt()){
+     numberOne = sc.nextInt();
+     if (numberOne > 0){
+      break;
+     }
+     else{
+     System.out.print("Please enter a positive integer: ");
+     continue;
+        }
+
+
+  }
+  else{
+      System.out.print("Please enter a positive integer: ");
+      sc.next();
+      continue;
+    }
+}
+
+
+   System.out.print("Enter another positive integer:");
+   while(true){
+    if(sc.hasNextInt()){
+     numberTwo = sc.nextInt();
+     if (numberTwo > 0){
+     break;}
+     else{
+      System.out.print("Please enter a positive integer: ");
+      continue;
+        }
+
+   }
+   else{
+  System.out.print("Please enter a positive integer: ");
+      sc.next();
+      continue;
+     }
+    }
+   int bigInt, smallInt;
+   bigInt = 0;
+   smallInt = 0;
+   if (numberOne > numberTwo){
+   bigInt = numberOne;
+   smallInt = numberTwo;
+   }
+    else if (numberOne == numberTwo) {
+      System.out.println("The GCD of " + numberOne + " and " + numberTwo + " is "  + numberOne);
+       return;
+    }
+    else {
+        bigInt  = numberTwo;
+        smallInt = numberOne;
+        }
+   int remainder, divisor, answer, nextDivisor;
+   remainder = bigInt % smallInt;
+   divisor = smallInt;
+   answer = smallInt;
+   while(remainder >  0){
+    nextDivisor = divisor % remainder;
+    divisor = remainder;
+    remainder = nextDivisor;
+     if(remainder>0){
+      answer=remainder;
+
+   }
+  }
+  System.out.println("The GCD of " + numberOne + " and " + numberTwo + " is "  + answer);
+ }
+}
