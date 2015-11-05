@@ -1,0 +1,101 @@
+// Roots.java
+// Jiahua Zhou
+// jzhou29
+// pa4
+// Calculates root/roots, if any, of a polynomial on an user-given interval
+
+import java.util.Scanner;
+class Roots{
+    public static void main (String[] args){
+        Scanner sc = new Scanner(System.in);
+        System.out.println("Enter the degree: ");
+        int degree = sc.nextInt();
+
+
+        System.out.println("Enter " + (degree+1) + " coefficients: ");
+
+        double[] C = new double[degree+1];
+        int i = 0;
+        for (i=0; i<(degree+1); i++){
+            C[i] = sc.nextDouble();}
+        System.out.println("Enter the left and right endpoints: ");
+        double L = sc.nextDouble();
+        double R = sc.nextDouble();
+
+        double tempL = L;
+        double tempR = R;
+
+        double resolution = .01;
+        double tolerance = .0000001;
+        double threshold = .001;
+        boolean oddRoot = false;
+        boolean evenRoot = false;
+        // [a,b]
+        double a = L;
+        double b = L + resolution;
+
+        while (a<R){
+        if( (poly(C, a))*(poly(C, b)) <0 ){
+               System.out.printf("Roots found at " + "%.5f%n", findRoot(C, a, b, tolerance)); // If there is sign change, call findRoot
+               oddRoot = true;
+
+        }
+        a=b;
+        b+=resolution; // move onto the next interval
+        }
+
+        //find even root
+        double tempA = tempL;
+        double tempB = tempL + resolution;
+
+        while (tempA<tempR){
+        if( (poly(diff(C), tempA))*(poly(diff(C), tempB)) <0){
+           double potentialRoot = Math.abs(poly(C, findRoot(diff(C), tempA, tempB, tolerance)));
+                if (potentialRoot<threshold){
+               System.out.printf("Roots found at " + "%.5f%n", findRoot(diff(C), tempA, tempB, tolerance));
+               evenRoot = true;
+           }
+        }
+        tempA=tempB;
+        tempB+=resolution; // move onto the next interval
+
+       }
+       if (evenRoot==false && oddRoot==false){
+            System.out.println("No roots were found in the specified range.");
+       }
+     }
+
+   static double[] diff(double[] C){
+        double D[] = new double[C.length-1];
+        for(int i = 1; i < C.length; i++){
+            D[i-1] = C[i] * i;
+        }
+        return D;
+    }
+
+    static double poly(double[] C, double x){
+        double sum = 0;
+        int expo = 0;
+        for (int i=0; i<C.length; i++){
+            sum += Math.pow(x, expo)*C[i];
+            expo ++;
+        }
+        return sum;
+    }
+
+    static double findRoot(double[] C, double a, double b, double tolerance){
+        double width = b-a;
+        double midpoint = a;
+        double threshold = .001;
+        while(width>tolerance){
+                midpoint=(a+b)/2;
+                if (poly(C,a)*poly(C,midpoint)<0){
+                    b=midpoint;
+                }else{
+                    a=midpoint;
+                }
+                width = b-a;
+            }
+        return midpoint;
+        }
+    }
