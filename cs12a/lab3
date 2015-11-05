@@ -1,0 +1,14 @@
+#! /bin/bash
+# RunLawn
+# Jiahua Zhou
+# jzhou29
+# lab3
+# Calculates mowing time, prints answer to Lawn-out
+
+echo "compiling Lawn.java"
+javac Lawn.java >& Lawn-errs
+echo "running Lawn.class"
+java Lawn < Lawn-in > Lawn-out
+echo "deleting the file Lawn.class"
+rm Lawn.class
+
