@@ -1,0 +1,11 @@
+// HellowWorld.java
+// Jiahua Zhou
+// jzhou29
+// lab1
+// Prints greeting
+
+class HelloWorld{
+ public static void main(String[] args){
+ System.out.println("Hello," + " my name is Jiahua Zhou.");
+ }
+}
