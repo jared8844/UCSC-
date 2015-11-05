@@ -1,0 +1,48 @@
+// Guess.java
+// Jiahua Zhou
+// jzhou29
+// pa2
+// User has 3 tries to guess a randomly generated number.
+
+import java.util.Scanner;
+
+class Guess{
+
+ public static void main( String[] args ){
+
+  Scanner sc = new Scanner(System.in);
+  System.out.print("I'm thinking of an integer in the range 1 to 10. You have three guesses.");
+  int theNumber = (int) (Math.random() * 10 + 1);
+  System.out.println(" Enter your first guess: ");
+  int first = sc.nextInt();
+  if (first == theNumber){
+   System.out.println("You win!");
+  return;
+  } else if (first >= theNumber){
+   System.out.println("Your guess is too high.");
+  } else if (first <= theNumber)
+   System.out.println("Your guess is too low.");
+
+  System.out.println("Enter your second guess ");
+  int second = sc.nextInt();
+  if (second == theNumber){
+   System.out.println("You win!");
+  return;
+  } else if (second >= theNumber){
+   System.out.println("Your guess is too high.");
+  } else if (second <= theNumber)
+   System.out.println("Your guess is too low.");
+
+  System.out.println("Enter your third guess ");
+  int third = sc.nextInt();
+   if (third == theNumber){
+   System.out.println("You win!");
+  return;
+  } else if (third >= theNumber){
+   System.out.println("Your guess is too high.");
+  } else if (third <= theNumber)
+   System.out.println("Your guess is too low.");
+
+  System.out.println("You lose. The number was" + " " + theNumber + ".");
+ }
+}
