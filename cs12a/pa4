@@ -22,49 +22,36 @@ class Roots{
         double L = sc.nextDouble();
         double R = sc.nextDouble();
 
-        double tempL = L;
-        double tempR = R;
-
         double resolution = .01;
         double tolerance = .0000001;
         double threshold = .001;
-        boolean oddRoot = false;
-        boolean evenRoot = false;
+        int counter = 0; 
         
         double a = L;
         double b = L + resolution;
 
         //find odd root
         while (a<R){
-        if( (poly(C, a))*(poly(C, b)) <0 ){
+        if( (poly(C, a))*(poly(C, b)) < 0 ){
                System.out.printf("Roots found at " + "%.5f%n", findRoot(C, a, b, tolerance)); // If there is sign change, call findRoot
-               oddRoot = true;
-
-        }
-        a=b;
-        b+=resolution; // move onto the next interval
-        }
-
+               counter++;
+         }
         //find even root
-        double tempA = tempL;
-        double tempB = tempL + resolution;
-
-        while (tempA<tempR){
-        if( (poly(diff(C), tempA))*(poly(diff(C), tempB)) <0){
-           double potentialRoot = Math.abs(poly(C, findRoot(diff(C), tempA, tempB, tolerance)));
-                if (potentialRoot<threshold){
-               System.out.printf("Roots found at " + "%.5f%n", findRoot(diff(C), tempA, tempB, tolerance));
-               evenRoot = true;
-           }
-        }
-        tempA=tempB;
-        tempB+=resolution; // move onto the next interval
-
+         else if( (poly(diff(C), a))*(poly(diff(C), b)) <0){
+           double potentialRoot = Math.abs(poly(C, findRoot(diff(C), a, b, tolerance)));
+               if (potentialRoot<threshold){
+               System.out.printf("Roots found at " + "%.5f%n", findRoot(diff(C), a, b, tolerance));
+               counter++;
+               }
+         }
+         a=b;
+         b+=resolution;
+         }
+        if (counter ==0){
+        System.out.println("No roots were found.");
        }
-       if (evenRoot==false && oddRoot==false){
-            System.out.println("No roots were found in the specified range.");
-       }
-     }
+    }
+
 
    static double[] diff(double[] C){
         double D[] = new double[C.length-1];
